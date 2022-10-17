@@ -26,12 +26,6 @@ public class Main {
         //обратиться к элементу arrayList
         System.out.println(timeSpendArray.get(0).timeStart);
 
-//        System.out.println(t.timeStart);
-//        System.out.println(t.timeStart.getHour());
-//        System.out.println(t.timeStart.getDayOfWeek());
-//        System.out.println(t.timeStart.getYear());
-//        System.out.println(t.timeStart.getDayOfYear());
-//        System.out.println(t.timeLength.toDays());
         ArrayList<String> typesOfActivities = new ArrayList<>();
         //ввод трех активностей
         typesOfActivities.add("программировал");
