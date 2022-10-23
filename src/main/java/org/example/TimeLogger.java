@@ -137,22 +137,23 @@ public class TimeLogger {
             String name = reader.readLine();
 
             switch (name) {
-                case "0":
+                case "0" -> {
                     System.out.println("Выход!");
                     exit = false;
-                    break;
-                case "1":
+                }
+                case "1" -> {
                     System.out.println("Добавить время новой активности");
-                    break;
-                case "2":
+                }
+                case "2" -> {
                     System.out.println("Добавить новый тип активности");
-                    typesOfActivities = enterAcivities (typesOfActivities);
-                    break;
-                case "3":
+                    typesOfActivities = enterAcivities(typesOfActivities);
+                }
+                case "3"-> {
                     System.out.println("Вывести активности за период");
-                    break;
-                default:
+                }
+                default->{
                     System.out.println("Неверный ввод!!");
+                }
             }
 
         }
