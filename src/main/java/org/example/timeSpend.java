@@ -10,19 +10,5 @@ import java.time.LocalDateTime;
         Duration timeLength;
         int activityType;
         String comment;
-
-//        @Override
-//        public String toString() {
-//
-//            return "Активность {" +
-//                    "начало " + timeStart +
-//                    ", конец " + timeStop +
-//                    ", длина " + timeLength +
-//                    ", тип активности " + activityType +
-//                    ", коммент '" + comment + '\'' +
-//                    '}';
-//        }
-
-
     }
 

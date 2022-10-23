@@ -123,12 +123,54 @@ public class TimeLogger {
 //        System.out.println(name);
 //        System.out.println(typesOfActivities.size());
 
-//      цикл ввода вывода данных с консоли
+        //основное меню ввода с клавиатуры
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        boolean exit = true;
+        while (exit) {
+            System.out.println();
+            System.out.println("Меню:");
+            System.out.println("1. Добавить время новой активности");
+            System.out.println("2. Добавить новый тип активности");
+            System.out.println("3. Вывести активности за период");
+            System.out.println("0. Выход");
+            String name = reader.readLine();
+
+            switch (name) {
+                case "0":
+                    System.out.println("Выход!");
+                    exit = false;
+                    break;
+                case "1":
+                    System.out.println("Добавить время новой активности");
+                    break;
+                case "2":
+                    System.out.println("Добавить новый тип активности");
+                    typesOfActivities = enterAcivities (typesOfActivities);
+                    break;
+                case "3":
+                    System.out.println("Вывести активности за период");
+                    break;
+                default:
+                    System.out.println("Неверный ввод!!");
+            }
+
+        }
+    }
+
+    static ArrayList<String> enterAcivities(ArrayList<String> typesOfActivities) throws IOException {
+        //      цикл ввода вывода данных с консоли
         int i = 0;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         boolean exit  = true;
         while (exit) {
-            System.out.println("Введите название активности:(0 назад)");
+            System.out.println();
+            System.out.println("Сейчас есть:");
+            for (String activities :typesOfActivities) {
+                System.out.println(activities);
+            }
+            System.out.println();
+            System.out.println("Введите название новой активности:(0 назад)");
             String name = reader.readLine();
             if (name.equals("0")) {
                 exit=false;
@@ -136,13 +178,10 @@ public class TimeLogger {
             else {
                 typesOfActivities.add(name);
             }
-            System.out.println(typesOfActivities);
-            System.out.println();
-            System.out.println();
             exit = exit && ++i < 3; //выход через 3 шага
         }
+        return typesOfActivities;
     }
-
 
 }
 
