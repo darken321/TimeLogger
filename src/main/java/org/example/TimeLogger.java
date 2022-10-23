@@ -122,6 +122,25 @@ public class TimeLogger {
 //        for (int i = 1; i<35; i++) System.out.println();
 //        System.out.println(name);
 //        System.out.println(typesOfActivities.size());
+
+//      цикл ввода вывода данных с консоли
+        int i = 0;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        boolean exit  = true;
+        while (exit) {
+            System.out.println("Введите название активности:(0 назад)");
+            String name = reader.readLine();
+            if (name.equals("0")) {
+                exit=false;
+            }
+            else {
+                typesOfActivities.add(name);
+            }
+            System.out.println(typesOfActivities);
+            System.out.println();
+            System.out.println();
+            exit = exit && ++i < 3; //выход через 3 шага
+        }
     }
 
 
