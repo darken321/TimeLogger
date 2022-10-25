@@ -14,31 +14,36 @@ public class TimeLogger {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         //инициализация массива String видов активностей
 
-        //ArrayList<String> typesOfActivities = new ArrayList<>(Arrays.asList("программировал", "ел", "спал"));
-        ArrayList<String> typesOfActivities = new ArrayList<>();
+        ArrayList<String> typesOfActivities = new ArrayList<>(Arrays.asList("программировал", "ел", "спал"));
+        //ArrayList<String> typesOfActivities = new ArrayList<>();
 
         //new init();
 
         //arraylist типа timeSpend хранит временные и описательные параметры активности
         ArrayList<timeSpend> timeSpendArray = new ArrayList<>();
         //ArrayList<timeSpend> timeSpendArray = null;
-
-//        timeSpend t1 = new timeSpend();
-//        timeSpend t2 = new timeSpend();//временная переменная t
-//        //заполенение первого элемента
-//        t1.timeStart = LocalDateTime.of(2021,3, 5, 12,35);
-//        t1.timeStop = LocalDateTime.of(2021,3, 15, 16,35);
-//        t1.timeLength = Duration.between(t1.timeStart, t1.timeStop); //разница времени
-//        t1.activityType = 3;
-//        t1.comment= "спал хорошо";
-//        timeSpendArray.add(t1);
-//        //заполенение второго элемента
-//        t2.timeStart = LocalDateTime.of(2022,Month.APRIL,14,14,30);
-//        t2.timeStop =  LocalDateTime.of(2022, Month.MAY, 23, 14, 30) ;
-//        t2.timeLength = Duration.between(t2.timeStart, t2.timeStop); //разница времени
-//        t2.activityType = 2;
-//        t2.comment= "ел вкусно111";
-//        timeSpendArray.add(t2);
+//разобрать эту хрнеь, сделать к timeSpendArray геттеры и сеттеры
+        timeSpend t1 = new timeSpend(); // значения заносятся позже
+        timeSpend t2 = new timeSpend(2021, 3, 5, 12, 35,   2021, 3, 15, 16, 35, 3, "спал хорощо");
+        /*timeSpend t2 = new timeSpend(
+                LocalDateTime.of(2021,3, 5, 12,35),
+                LocalDateTime.of(2021,3, 15, 16,35),
+                3, "спал хорошо"
+                );*/ //временная переменная t
+        //заполенение первого элемента
+        t1.timeStart = LocalDateTime.of(2021,3, 5, 12,35);
+        t1.timeStop = LocalDateTime.of(2021,3, 15, 16,35);
+        t1.timeLength = Duration.between(t1.timeStart, t1.timeStop); //разница времени
+        t1.activityType = 3;
+        t1.comment= "спал хорошо";
+        timeSpendArray.add(t1);
+        //заполенение второго элемента
+        t2.timeStart = LocalDateTime.of(2022,Month.APRIL,14,14,30);
+        t2.timeStop =  LocalDateTime.of(2022, Month.MAY, 23, 14, 30) ;
+        t2.timeLength = Duration.between(t2.timeStart, t2.timeStop); //разница времени
+        t2.activityType = 2;
+        t2.comment= "ел вкусно111";
+        timeSpendArray.add(t2);
 
 
         //инициализация файлов
@@ -69,10 +74,10 @@ public class TimeLogger {
 
 
         //запись в файл типов активности
-//        FileOutputStream outStreamAcivities = new FileOutputStream(ACT_FILE_NAME);
-//        ObjectOutputStream objectOutputStreamAct = new ObjectOutputStream(outStreamAcivities);
+//        FileOutputStream outStreamActivities = new FileOutputStream(ACT_FILE_NAME);
+//        ObjectOutputStream objectOutputStreamAct = new ObjectOutputStream(outStreamActivities);
 //        objectOutputStreamAct.writeObject(typesOfActivities);
-//        outStreamAcivities.close();
+//        outStreamActivities.close();
 //        System.out.println("записал типы активностей");
 
         //запись в файл времени активности
@@ -145,7 +150,9 @@ public class TimeLogger {
                     System.out.println("Добавить время новой активности");
                 }
                 case "2" -> {
-                    System.out.println("Добавить новый тип активности");
+                    System.out.println();
+                    //System.out.println("-------------------------------------");
+                    System.out.println("Можно добавить новый тип активности");
                     typesOfActivities = enterAcivities(typesOfActivities);
                 }
                 case "3"-> {
@@ -166,7 +173,8 @@ public class TimeLogger {
         boolean exit  = true;
         while (exit) {
             System.out.println();
-            System.out.println("Сейчас есть:");
+            System.out.println("Сейчас есть активности:");
+            System.out.println("_____________________________________");
             for (String activities :typesOfActivities) {
                 System.out.println(activities);
             }
