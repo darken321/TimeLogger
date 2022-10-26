@@ -3,9 +3,10 @@ package org.example;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.Month;
 
 
-    class timeSpend implements Serializable {
+class timeSpend implements Serializable {
         LocalDateTime timeStart;
         LocalDateTime timeStop;
         Duration timeLength;
@@ -28,7 +29,17 @@ import java.time.LocalDateTime;
             this.activityType = activityType;
             this.comment = comment;
         }
+        //4 int + string, день продолжительность(час мин) тип коммент
+        public timeSpend(int dayOfMonth, int durationHours, int durationsMinutes, int activityType, String comment ) {
+            this.timeStart = null;
+            this.timeStop = null;
+            //timeStart = LocalDateTime.of(2022, Month.MAY,23,14,30);
+            //timeStop =  LocalDateTime.of(2022, Month.MAY, 23, 16, 40) ;
 
+            this.timeLength = Duration.ofHours(durationHours).plusMinutes(durationsMinutes);
+            this.activityType = activityType;
+            this.comment = comment;
+        }
 
 
         public LocalDateTime getTimeStart() {

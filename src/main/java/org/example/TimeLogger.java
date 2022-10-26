@@ -13,38 +13,29 @@ import java.util.Arrays;
 public class TimeLogger {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         //инициализация массива String видов активностей
-
         ArrayList<String> typesOfActivities = new ArrayList<>(Arrays.asList("программировал", "ел", "спал"));
-        //ArrayList<String> typesOfActivities = new ArrayList<>();
-
-        //new init();
-
         //arraylist типа timeSpend хранит временные и описательные параметры активности
         ArrayList<timeSpend> timeSpendArray = new ArrayList<>();
         //ArrayList<timeSpend> timeSpendArray = null;
 //разобрать эту хрнеь, сделать к timeSpendArray геттеры и сеттеры
-        timeSpend t1 = new timeSpend(); // значения заносятся позже
-        timeSpend t2 = new timeSpend(2021, 3, 5, 12, 35,   2021, 3, 15, 16, 35, 3, "спал хорощо");
-        /*timeSpend t2 = new timeSpend(
-                LocalDateTime.of(2021,3, 5, 12,35),
-                LocalDateTime.of(2021,3, 15, 16,35),
-                3, "спал хорошо"
-                );*/ //временная переменная t
-        //заполенение первого элемента
-        t1.timeStart = LocalDateTime.of(2021,3, 5, 12,35);
-        t1.timeStop = LocalDateTime.of(2021,3, 15, 16,35);
-        t1.timeLength = Duration.between(t1.timeStart, t1.timeStop); //разница времени
-        t1.activityType = 3;
-        t1.comment= "спал хорошо";
-        timeSpendArray.add(t1);
-        //заполенение второго элемента
-        t2.timeStart = LocalDateTime.of(2022,Month.APRIL,14,14,30);
-        t2.timeStop =  LocalDateTime.of(2022, Month.MAY, 23, 14, 30) ;
-        t2.timeLength = Duration.between(t2.timeStart, t2.timeStop); //разница времени
-        t2.activityType = 2;
-        t2.comment= "ел вкусно111";
-        timeSpendArray.add(t2);
+        timeSpend t1 = new timeSpend(2021, 3, 5, 12, 35,   2021, 3, 15, 16, 35, 3, "спал хорощо");
+        //timeSpend t2 = new timeSpend(2022, 4, 14,14, 30, 2022, 5, 23, 14, 30, 2, "Ел вкусно"); // значения заносятся позже
+        timeSpend t2 = new timeSpend(24,2,35, 1,"изучал java");
+//        t1.timeStart = LocalDateTime.of(2021,3, 5, 12,35);
+//        t1.timeStop = LocalDateTime.of(2021,3, 15, 16,35);
+//        t1.timeLength = Duration.between(t1.timeStart, t1.timeStop); //разница времени
+//        t1.activityType = 3;
+//        t1.comment= "спал хорошо";
 
+//        //заполенение второго элемента
+//        t2.timeStart = LocalDateTime.of(2022,Month.APRIL,14,14,30);
+//        t2.timeStop =  LocalDateTime.of(2022, Month.MAY, 23, 14, 30) ;
+//        t2.timeLength = Duration.between(t2.timeStart, t2.timeStop); //разница времени
+//        t2.activityType = 2;
+//        t2.comment= "ел вкусно111";
+
+        timeSpendArray.add(t1);
+        timeSpendArray.add(t2);
 
         //инициализация файлов
         System.out.println();
@@ -108,16 +99,16 @@ public class TimeLogger {
         System.out.println(typesOfActivities);
 
         //чтение времени  активностей из файла
-        FileInputStream inStreamTime = new FileInputStream(TIME_SPEND_NAME);
-        ObjectInputStream objectInputStreamTime = new ObjectInputStream(inStreamTime);
-        timeSpendArray = (ArrayList<timeSpend>) objectInputStreamTime.readObject();
-        inStreamTime.close();
-        objectInputStreamTime.close();
-        System.out.println(timeSpendArray.get(0));
-        System.out.println(timeSpendArray.get(1));
-        System.out.println(timeSpendArray.get(0).comment);
-        System.out.println(timeSpendArray.get(1).comment);
+//        FileInputStream inStreamTime = new FileInputStream(TIME_SPEND_NAME);
+//        ObjectInputStream objectInputStreamTime = new ObjectInputStream(inStreamTime);
+//        timeSpendArray = (ArrayList<timeSpend>) objectInputStreamTime.readObject();
+//        inStreamTime.close();
+//        objectInputStreamTime.close();
 
+
+      //  System.out.println(timeSpendArray.get(0).comment);
+        System.out.print (timeSpendArray.get(1).comment);
+        System.out.println(" " + timeSpendArray.get(1).timeLength.toHours() + " часа " + timeSpendArray.get(1).timeLength.toMinutesPart() + " минуты");
 
         //ввод трех активностей с клавиатуры
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -147,7 +138,8 @@ public class TimeLogger {
                     exit = false;
                 }
                 case "1" -> {
-                    System.out.println("Добавить время новой активности");
+                    //System.out.println("Добавить время новой активности");
+                    timeSpendArray = enterDuration(timeSpendArray);
                 }
                 case "2" -> {
                     System.out.println();
@@ -165,7 +157,7 @@ public class TimeLogger {
 
         }
     }
-
+    //ввод активностей + меню
     static ArrayList<String> enterAcivities(ArrayList<String> typesOfActivities) throws IOException {
         //      цикл ввода вывода данных с консоли
         int i = 0;
@@ -189,7 +181,42 @@ public class TimeLogger {
             }
             exit = exit && ++i < 3; //выход через 3 шага
         }
+
         return typesOfActivities;
+    }
+    //вводим время активности сегодня
+    static ArrayList<timeSpend> enterDuration(ArrayList<timeSpend> timeSpendArray) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int i = 0;
+        timeSpend t = null;
+        boolean exit  = true;
+        //while (exit) {
+            //добавить к строкам trim
+            System.out.println("Ввод времени новой активности");
+            System.out.println();
+            System.out.println("Введите дату новой активности:");
+            String dayOfMonth = reader.readLine();
+            System.out.println(dayOfMonth);
+            System.out.println(Integer.parseInt(dayOfMonth));
+            System.out.println(Integer.parseInt("33"));
+
+            t.timeStop = LocalDateTime.of(2022,Integer.parseInt(dayOfMonth), 1 , 1, 1);
+            t.timeStart =null; //если timeStart null то у активности нет точного времени
+            //если будет ругаться на null то сделать старт равным стоп
+            System.out.println("Введите количество часов новой активности:");
+            String durationHours = reader.readLine();
+            System.out.println("Введите количество минут новой активности:");
+            String durationsMinutes =reader.readLine();
+            t.timeLength = Duration.ofHours(Integer.parseInt(durationHours)).plusMinutes(Integer.parseInt(durationsMinutes));
+
+            System.out.println("Введите номер типа активности:");
+            String typeOfActivities =reader.readLine();
+            t.activityType = Integer.parseInt(typeOfActivities); //преобразовал в int
+            System.out.println(t);
+            //exit = exit && ++i < 3; //выход через 3 шага
+        //}
+        timeSpendArray.add(t);
+        return timeSpendArray;
     }
 
 }
