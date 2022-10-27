@@ -138,7 +138,6 @@ public class TimeLogger {
                     exit = false;
                 }
                 case "1" -> {
-                    //System.out.println("Добавить время новой активности");
                     timeSpendArray = enterDuration(timeSpendArray);
                 }
                 case "2" -> {
@@ -188,7 +187,7 @@ public class TimeLogger {
     static ArrayList<timeSpend> enterDuration(ArrayList<timeSpend> timeSpendArray) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         int i = 0;
-        timeSpend t = null;
+        timeSpend t = new timeSpend();
         boolean exit  = true;
         //while (exit) {
             //добавить к строкам trim
@@ -198,9 +197,8 @@ public class TimeLogger {
             String dayOfMonth = reader.readLine();
             System.out.println(dayOfMonth);
             System.out.println(Integer.parseInt(dayOfMonth));
-            System.out.println(Integer.parseInt("33"));
 
-            t.timeStop = LocalDateTime.of(2022,Integer.parseInt(dayOfMonth), 1 , 1, 1);
+            t.timeStop = LocalDateTime.of(2022,10,Integer.parseInt(dayOfMonth),  1, 1);
             t.timeStart =null; //если timeStart null то у активности нет точного времени
             //если будет ругаться на null то сделать старт равным стоп
             System.out.println("Введите количество часов новой активности:");
